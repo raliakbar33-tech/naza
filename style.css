@@ -1,0 +1,859 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(160deg, #fff8e1 0%, #ffecb3 30%, #ffe082 55%, #ffcc80 80%, #ffb74d 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 20% 30%, rgba(255, 235, 59, 0.25) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 70% at 80% 70%, rgba(255, 167, 38, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 193, 7, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* Elegant Kibrit Kutusu */
+.matchbox-container {
+    position: fixed;
+    bottom: 60px;
+    left: 60px;
+    z-index: 10;
+    transform: none !important;
+}
+
+.matchbox {
+    width: 140px;
+    height: 95px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.matchbox-top {
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(145deg, #a0522d 0%, #8b4513 50%, #654321 100%);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 
+        0 -2px 10px rgba(0, 0, 0, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.matchbox-top::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+}
+
+.matchbox-body {
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(145deg, #8b4513 0%, #654321 50%, #5a2d0c 100%);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.matchbox-label {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+}
+
+.matchbox-striker {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    right: 12px;
+    height: 28px;
+    background: repeating-linear-gradient(
+        90deg,
+        #ff6b35 0px,
+        #ff6b35 3px,
+        #ff8c42 3px,
+        #ff8c42 6px
+    );
+    border-radius: 4px;
+    box-shadow: 
+        inset 0 2px 6px rgba(0, 0, 0, 0.3),
+        0 1px 2px rgba(255, 107, 53, 0.5);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+/* Elegant Kibrit */
+.match {
+    position: absolute;
+    bottom: 105px;
+    left: 70px;
+    width: 6px;
+    height: 130px;
+    cursor: grab;
+    transform-origin: bottom center;
+    z-index: 20;
+    transition: transform 0.1s ease;
+}
+
+.match:active {
+    cursor: grabbing;
+}
+
+.match-stick {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        #f5deb3 0%,
+        #deb887 30%,
+        #d2b48c 60%,
+        #c9a961 100%
+    );
+    border-radius: 3px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset -1px 0 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.match-stick::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 3px 3px 0 0;
+}
+
+.match-head {
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(
+        circle at 30% 30%,
+        #ff6b35 0%,
+        #d2691e 40%,
+        #8b4513 80%,
+        #654321 100%
+    );
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: absolute;
+    top: -7px;
+    left: -4px;
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Yanan Kibrit - Elegant Alev */
+.match.burning .match-head {
+    width: 16px;
+    height: 28px;
+    background: transparent;
+    position: relative;
+}
+
+.match.burning .match-head::before {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 24px;
+    background: linear-gradient(
+        to top,
+        #ffffff 0%,
+        #fff9c4 5%,
+        #ffeb3b 18%,
+        #ffc107 32%,
+        #ff9800 50%,
+        #ff6b35 70%,
+        #e65100 90%,
+        #bf360c 100%
+    );
+    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+    clip-path: polygon(
+        20% 0%,
+        80% 0%,
+        95% 25%,
+        100% 50%,
+        100% 100%,
+        0% 100%,
+        0% 50%,
+        5% 25%
+    );
+    animation: elegantFlame 0.1s ease-in-out infinite alternate;
+    filter: blur(0.4px);
+    box-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.9),
+        0 0 10px rgba(255, 235, 59, 0.7),
+        0 0 15px rgba(255, 152, 0, 0.6),
+        0 0 20px rgba(255, 107, 53, 0.4);
+}
+
+.match.burning .match-head::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 28px;
+    background: radial-gradient(
+        ellipse at center bottom,
+        rgba(255, 235, 59, 0.5) 0%,
+        rgba(255, 152, 0, 0.6) 25%,
+        rgba(255, 107, 53, 0.5) 50%,
+        rgba(255, 69, 0, 0.3) 75%,
+        transparent 100%
+    );
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: elegantFlameGlow 0.15s ease-in-out infinite alternate;
+    z-index: -1;
+    filter: blur(1.2px);
+}
+
+.match.burning::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 32px;
+    background: radial-gradient(
+        ellipse at center bottom,
+        rgba(255, 235, 59, 0.2) 0%,
+        rgba(255, 152, 0, 0.15) 40%,
+        transparent 80%
+    );
+    border-radius: 50%;
+    animation: elegantFlameAura 0.18s ease-in-out infinite alternate;
+    z-index: -2;
+    pointer-events: none;
+}
+
+@keyframes elegantFlame {
+    0% {
+        transform: translateX(-50%) scaleY(1) scaleX(1) rotate(-1.5deg);
+        height: 24px;
+        filter: blur(0.4px);
+    }
+    25% {
+        transform: translateX(-50%) scaleY(1.1) scaleX(0.9) rotate(0.8deg);
+        height: 26px;
+        filter: blur(0.5px);
+    }
+    50% {
+        transform: translateX(-50%) scaleY(1.05) scaleX(1.05) rotate(-0.5deg);
+        height: 25px;
+        filter: blur(0.45px);
+    }
+    75% {
+        transform: translateX(-50%) scaleY(1.08) scaleX(0.92) rotate(0.5deg);
+        height: 26px;
+        filter: blur(0.5px);
+    }
+    100% {
+        transform: translateX(-50%) scaleY(1.12) scaleX(0.88) rotate(1.5deg);
+        height: 27px;
+        filter: blur(0.55px);
+    }
+}
+
+@keyframes elegantFlameGlow {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(-50%) scale(1.15);
+        opacity: 0.9;
+    }
+}
+
+@keyframes elegantFlameAura {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(-50%) scale(1.25);
+        opacity: 0.6;
+    }
+}
+
+.match.burning {
+    filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.6))
+            drop-shadow(0 0 15px rgba(255, 152, 0, 0.4))
+            drop-shadow(0 0 25px rgba(255, 107, 53, 0.3));
+}
+
+/* Kıvılcım Efektleri */
+.sparks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    overflow: hidden;
+}
+
+.spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #ffeb3b, #ff9800);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkFly 0.7s ease-out forwards;
+    box-shadow: 0 0 6px rgba(255, 235, 59, 0.9);
+}
+
+@keyframes sparkFly {
+    0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(0.9) translate(var(--spark-x), var(--spark-y));
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.2) translate(var(--spark-x-end), var(--spark-y-end));
+    }
+}
+
+/* Beyaz Kağıt - bowling skorboard oranı (yatay kutu) */
+.paper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 560px;
+    height: 350px;
+    background: transparent;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    --burn-x: 280px;
+    --burn-y: 175px;
+    --burn-radius: 380px;
+}
+
+/* Kağıt Grid Container - kağıtla aynı boyut, parçalar absolute + 1px örtüşme */
+.paper-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 560px;
+    height: 350px;
+    pointer-events: none;
+}
+
+/* Kağıt Parçaları - sabit kareler, 1px örtüşme (arada boşluk olmaz) */
+.paper-piece {
+    position: absolute;
+    background: #ffffff;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    transition: background 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Yanma Animasyonu - Beyazdan Alev Renklerine */
+.paper-piece.burning {
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #fff9c4 10%,
+        #ffeb3b 20%,
+        #ffc107 30%,
+        #ff9800 40%,
+        #ff6b35 50%,
+        #e65100 60%,
+        #bf360c 70%,
+        #8b4513 80%,
+        #654321 90%,
+        #3e2723 100%
+    );
+    box-shadow: 
+        0 0 8px rgba(255, 235, 59, 0.6),
+        0 0 15px rgba(255, 152, 0, 0.4),
+        0 0 25px rgba(255, 107, 53, 0.3),
+        inset 0 0 10px rgba(255, 69, 0, 0.2);
+    animation: pieceBurn 0.4s ease-out forwards;
+    z-index: 2;
+    border: none;
+}
+
+@keyframes pieceBurn {
+    0% {
+        background: #ffffff;
+        box-shadow: none;
+        border: none;
+    }
+    20% {
+        background: linear-gradient(135deg, #fff9c4, #ffeb3b);
+        box-shadow: 0 0 5px rgba(255, 235, 59, 0.4);
+        border: none;
+    }
+    40% {
+        background: linear-gradient(135deg, #ffeb3b, #ffc107, #ff9800);
+        box-shadow: 
+            0 0 8px rgba(255, 235, 59, 0.5),
+            0 0 12px rgba(255, 152, 0, 0.3);
+        border: none;
+    }
+    60% {
+        background: linear-gradient(135deg, #ff9800, #ff6b35, #e65100);
+        box-shadow: 
+            0 0 10px rgba(255, 152, 0, 0.4),
+            0 0 18px rgba(255, 107, 53, 0.3);
+        border: none;
+    }
+    80% {
+        background: linear-gradient(135deg, #e65100, #bf360c, #8b4513);
+        box-shadow: 
+            0 0 12px rgba(255, 107, 53, 0.3),
+            0 0 20px rgba(255, 69, 0, 0.2);
+        border: none;
+        opacity: 0.8;
+    }
+    100% {
+        background: transparent;
+        box-shadow: none;
+        opacity: 0;
+        border: none;
+    }
+}
+
+.paper-piece.burned {
+    opacity: 0;
+    pointer-events: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    /* Parça şeffaf oldu, arkasındaki fotoğraf görünür */
+}
+
+.paper.burning {
+    position: relative;
+}
+
+.paper.burned {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* Yanma Başlangıç Noktası */
+.burn-origin {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+}
+
+.burn-origin.active {
+    animation: burnOriginIgnite 0.3s ease-out forwards;
+}
+
+@keyframes burnOriginIgnite {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+        box-shadow: 0 0 0 rgba(255, 235, 59, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+        box-shadow: 
+            0 0 15px rgba(255, 235, 59, 0.8),
+            0 0 30px rgba(255, 152, 0, 0.6),
+            0 0 45px rgba(255, 107, 53, 0.4);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+        box-shadow: 
+            0 0 25px rgba(255, 235, 59, 0.6),
+            0 0 50px rgba(255, 152, 0, 0.4),
+            0 0 75px rgba(255, 107, 53, 0.2);
+    }
+}
+
+/* Yanma Efekti Partikülleri - Gerçekçi */
+.burn-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.burn-effect.active {
+    opacity: 1;
+    animation: burnParticles 1.8s ease-out;
+}
+
+@keyframes burnParticles {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.4;
+    }
+    60% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}
+
+.burn-effect::before,
+.burn-effect::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #ffeb3b, #ff9800, transparent);
+    border-radius: 50%;
+    animation: floatUp 1.5s ease-out forwards;
+    box-shadow: 0 0 8px rgba(255, 235, 59, 0.8);
+}
+
+.burn-effect::before {
+    left: var(--burn-x);
+    top: var(--burn-y);
+    animation-delay: 0.1s;
+}
+
+.burn-effect::after {
+    left: calc(var(--burn-x) + 30px);
+    top: calc(var(--burn-y) - 20px);
+    animation-delay: 0.3s;
+}
+
+.burn-effect.active::before,
+.burn-effect.active::after {
+    animation: floatUp 1.5s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(10px, -40px) scale(1.3);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(20px, -80px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Arka Plan Fotoğrafı - Kağıtla Aynı Ölçüde (skorboard oranı) */
+.background-photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 560px;
+    height: 350px;
+    opacity: 1;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: #1a1a1a;
+    border-radius: 8px;
+}
+
+.background-photo.visible {
+    opacity: 1;
+}
+
+.background-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: fadeInScale 2s ease;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Başlık Mesajı - Fotoğrafın Üstünde */
+.title-message {
+    position: absolute;
+    top: calc(50% - 270px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    width: 92%;
+    max-width: 960px;
+    text-align: center;
+}
+
+.title-message h1 {
+    font-family: 'Noto Sans', 'Segoe UI', sans-serif;
+    font-size: 40px;
+    color: #e65100;
+    text-shadow: 
+        0 2px 12px rgba(230, 81, 0, 0.3),
+        0 0 40px rgba(255, 152, 0, 0.25),
+        0 4px 24px rgba(0, 0, 0, 0.18);
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 1.4;
+    animation: titleFadeIn 1.5s ease-out;
+}
+
+@keyframes titleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .paper {
+        width: 320px;
+        height: 200px;
+        --burn-x: 160px;
+        --burn-y: 100px;
+        --burn-radius: 220px;
+    }
+    
+    .paper-grid {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .background-photo {
+        width: 320px;
+        height: 200px;
+    }
+    
+    .matchbox {
+        width: 120px;
+        height: 80px;
+    }
+    
+    .match {
+        height: 110px;
+        bottom: 90px;
+        left: 60px;
+    }
+    
+    .title-message h1 {
+        font-size: 26px;
+        font-weight: 700;
+    }
+    
+    .notes-container {
+        right: 20px;
+        transform: translateY(-50%) scale(0.85);
+        height: 260px;
+    }
+    
+    .note-card {
+        width: 155px;
+        height: 165px;
+    }
+    
+    .note-content {
+        font-size: 11px;
+        padding: 12px 10px 24px 12px;
+    }
+}
+
+/* Not Kartları - Sağ Tarafta (post-it tarzı) */
+.notes-container {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    perspective: 2000px;
+    width: 180px;
+    height: 300px;
+}
+
+.note-card {
+    position: absolute;
+    width: 168px;
+    height: 175px;
+    background: linear-gradient(160deg, #fffde7 0%, #fff8e1 40%, #ffecb3 100%);
+    border-radius: 4px;
+    border-left: 4px solid #ff9800;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        4px 4px 0 rgba(255, 152, 0, 0.15);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.3s ease;
+    backface-visibility: hidden;
+    opacity: 1;
+    will-change: transform;
+    overflow: hidden;
+}
+
+.note-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 22px 22px;
+    border-color: transparent transparent rgba(255, 152, 0, 0.25) transparent;
+    border-radius: 0 0 4px 0;
+}
+
+.note-card:hover {
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        0 12px 32px rgba(0, 0, 0, 0.15),
+        6px 6px 0 rgba(255, 152, 0, 0.2);
+}
+
+.note-card[data-index="0"] {
+    z-index: 3;
+    transform: translateY(0) rotateY(0deg) scale(1);
+}
+
+.note-card[data-index="1"] {
+    z-index: 2;
+    transform: translateY(8px) rotateY(2deg) scale(0.98);
+}
+
+.note-card[data-index="2"] {
+    z-index: 1;
+    transform: translateY(12px) rotateY(3deg) scale(0.98);
+}
+
+.note-card[data-index="3"] {
+    z-index: 1;
+    transform: translateY(18px) rotateY(4.5deg) scale(0.97);
+}
+
+.note-card[data-index="4"] {
+    z-index: 1;
+    transform: translateY(24px) rotateY(6deg) scale(0.96);
+}
+
+.note-card[data-index="5"] {
+    z-index: 1;
+    transform: translateY(30px) rotateY(7.5deg) scale(0.95);
+}
+
+.note-card.flipping {
+    transform: translateY(0) rotateY(180deg) scale(0.95);
+    z-index: 0;
+}
+
+.note-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 12px 28px 14px;
+    color: #5d4037;
+    font-family: 'Noto Sans', 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.45;
+    word-wrap: break-word;
+    user-select: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+}
+
+.note-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.note-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 152, 0, 0.4);
+    border-radius: 2px;
+}
+
